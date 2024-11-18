@@ -1,0 +1,10 @@
+<div class="header-wrap flex justify-between m-5">
+  <app-search (searchQuery)="onSearch($event)" class="w-4/6"></app-search>
+  <button mat-flat-button (click)="openDialog()">Add book</button>
+</div>
+<app-item-list
+  (updateValue)="handleUpdate($event)"
+  (deleteValue)="handleDelete($event)"
+  (handleItemClick)="handleItemClicked($event)"
+  [items]="books | async"
+></app-item-list>

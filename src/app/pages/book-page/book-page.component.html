@@ -1,0 +1,17 @@
+<mat-card  appearance="outlined">
+  <div class="flex flex-center flex-col items-center relative">
+    <div (click)="goBack()" class="absolute top-[10px] left-[10px] cursor-pointer">
+      <fa-icon size="2x" color="blue" [icon]="faHome" ></fa-icon> 
+    </div>
+    <mat-card-header>
+      <mat-card-title class="text-center">{{ itemData?.title }} {{ itemData?.year }}</mat-card-title>
+      <mat-card-subtitle class="text-center">{{ itemData?.author }}</mat-card-subtitle>
+    </mat-card-header>
+    <img class="w-[20rem]" mat-card-image [src]="itemData?.imageUrl" alt="Photo of a Shiba Inu" />
+    <mat-card-content class="text-center">
+      <p class="py-8">
+        {{ itemData?.description }}
+      </p>
+    </mat-card-content>
+  </div>
+</mat-card>

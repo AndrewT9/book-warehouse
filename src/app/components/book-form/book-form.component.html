@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Add a new book</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formGroup!" (ngSubmit)="onSubmit()" class="form flex flex-col w-[500px]">
+        <mat-form-field class="form-element">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" required />
+          <mat-error *ngIf="submitted && formGroup!.get('title')!.errors?.required">Title is required.</mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="form-element">
+          <mat-label>Author</mat-label>
+          <input matInput formControlName="author" required />
+          <mat-error *ngIf="submitted && formGroup!.get('author')!.errors?.required">Author is required.</mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="form-element">
+          <mat-label>Year</mat-label>
+          <input matInput formControlName="year" required />
+          <mat-error *ngIf="submitted && formGroup!.get('year')!.errors?.required">Year is required.</mat-error>
+          <mat-error *ngIf="submitted && formGroup!.get('year')!.errors?.pattern">Invalid year.</mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="form-element">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+          <mat-error *ngIf="submitted && formGroup!.get('description')!.errors?.required">Description is required.</mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="form-element">
+          <mat-label>Image URL</mat-label>
+          <input matInput formControlName="imageUrl" required />
+          <mat-error *ngIf="submitted && formGroup!.get('imageUrl')!.errors?.required">Image URL is required.</mat-error>
+        </mat-form-field>
+      
+        <div mat-dialog-actions>
+          <button mat-button mat-dialog-close>Cancel</button>
+          <button mat-button type="submit" [disabled]="!formGroup!.valid">{{btnText}} Book</button>
+        </div>
+      </form>
+</div>
+
