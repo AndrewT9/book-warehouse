@@ -8,7 +8,7 @@ import { BookFormComponent } from '../../components/book-form/book-form.componen
 import { CommonModule } from '@angular/common'
 import { Book } from '../../models/book.interface'
 import { Router } from '@angular/router'
-import { map } from 'rxjs'
+import { catchError, debounceTime, map, of, share } from 'rxjs'
 
 @Component({
   selector: 'app-home',
@@ -52,6 +52,7 @@ export default class HomePage implements OnDestroy {
   public onSearch(query: string = ''): void {
     this.bookService.booksSource$
       .pipe(
+        debounceTime(500),
         map((books: Book[]) => {
           if (!query) {
             return books
@@ -63,13 +64,17 @@ export default class HomePage implements OnDestroy {
               book.author.toLowerCase().includes(query.toLowerCase()),
           )
         }),
+        catchError((error) => {
+          console.error('Error occurred during search', error)
+          return of([])
+        }),
       )
       .subscribe((filteredBooks) => {
-        this.bookService.searchBooksSource$.next(filteredBooks)
+        this.bookService.searchBooksSource$.next(filteredBooks);
       })
   }
 
   ngOnDestroy() {
-    this.bookService.booksSource$.unsubscribe();
+    this.bookService.booksSource$.unsubscribe()
   }
 }
