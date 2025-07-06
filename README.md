@@ -30,7 +30,7 @@ in a clean, responsive card-based interface.
 1. **Clone the repo**
 
    ```bash
-   git clone https://github.com/AndrewT9/book-warehouse.git
+   git clone https://github.com/AndrewT9/Book-Warehouse.git
    cd book-warehouse
    ```
 
